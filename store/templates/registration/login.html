@@ -1,0 +1,47 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+<div class="auth-container" style="min-height: calc(100vh - 200px);">
+    <div class="row justify-content-center w-100">
+        <div class="col-md-6 col-lg-5">
+            <div class="card auth-card">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <h2 class="fw-bold">Вход в аккаунт</h2>
+                        <p class="text-muted">Введите свои данные для входа</p>
+                    </div>
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        {% if form.errors %}
+                        <div class="alert alert-danger">
+                            Неверное имя пользователя или пароль. Пожалуйста, попробуйте again.
+                        </div>
+                        {% endif %}
+                        
+                        <div class="mb-3">
+                            <label for="id_username" class="form-label">Имя пользователя</label>
+                            <input type="text" name="username" class="form-control form-control-lg" id="id_username" required autofocus>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="id_password" class="form-label">Пароль</label>
+                            <input type="password" name="password" class="form-control form-control-lg" id="id_password" required>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-lg w-100 mb-3">Войти</button>
+                        
+                        <div class="text-center">
+                            <span class="text-muted">Еще нет аккаунта? </span>
+                            <a href="{% url 'register' %}" class="text-decoration-none">Зарегистрироваться</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

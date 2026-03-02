@@ -1,0 +1,313 @@
+{% extends 'store/admin/base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Заголовок страницы -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800 fade-in-up">Панель управления</h1>
+        <span class="badge bg-primary fade-in-up delay-1">{{ today|date:"d M Y" }}</span>
+    </div>
+
+
+    <!-- Статистика -->
+    <div class="row">
+        <!-- Всего заказов -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card stat-card border-left-primary shadow h-100 py-2 fade-in-up delay-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Всего заказов</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ stats.total_orders }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-cart-check fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Новые заказы -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card stat-card border-left-success shadow h-100 py-2 fade-in-up delay-3">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Новые заказы</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ stats.new_orders }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-cart-plus fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Пользователи -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card stat-card border-left-info shadow h-100 py-2 fade-in-up delay-4">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Пользователи</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ stats.total_users }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-people fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Товары -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card stat-card border-left-warning shadow h-100 py-2 fade-in-up delay-5">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Товары</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ stats.total_products }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-box-seam fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Последние заказы -->
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow fade-in-up delay-2">
+                <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="m-0 font-weight-bold text-primary">Последние заказы</h6>
+                    <a href="{% url 'admin_order_list' %}" class="btn btn-sm btn-primary">Все заказы</a>
+                </div>
+                <div class="card-body">
+                    {% if recent_orders %}
+                    <div class="list-group list-group-flush">
+                        {% for order in recent_orders %}
+                        <a href="{% url 'admin_order_detail' order.id %}" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">Заказ #{{ order.id }}</h6>
+                                <small>{{ order.created_at|timesince }} назад</small>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span>{{ order.user.username }} - {{ order.total_price }} руб.</span>
+                                <span class="badge bg-{% if order.status == 'new' %}primary{% elif order.status == 'completed' %}success{% elif order.status == 'cancelled' %}danger{% else %}warning{% endif %}">
+                                    {{ order.get_status_display }}
+                                </span>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="text-center py-4">
+                        <i class="bi bi-inbox display-4 text-muted"></i>
+                        <p class="mt-3 text-muted">Нет заказов</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Новые пользователи -->
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow fade-in-up delay-3">
+                <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="m-0 font-weight-bold text-primary">Новые пользователи</h6>
+                    <a href="{% url 'admin_user_list' %}" class="btn btn-sm btn-primary">Все пользователи</a>
+                </div>
+                <div class="card-body">
+                    {% if recent_users %}
+                    <div class="list-group list-group-flush">
+                        {% for user in recent_users %}
+                        <a href="{% url 'admin_user_detail' user.id %}" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">{{ user.username }}</h6>
+                                <small>{{ user.date_joined|timesince }} назад</small>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span>{{ user.email }}</span>
+                                <span class="badge bg-{% if user.role == 'admin' %}danger{% else %}info{% endif %}">
+                                    {{ user.get_role_display }}
+                                </span>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="text-center py-4">
+                        <i class="bi bi-people display-4 text-muted"></i>
+                        <p class="mt-3 text-muted">Нет пользователей</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Графики и дополнительная статистика -->
+    <div class="row">
+        <!-- Статистика по категориям -->
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow fade-in-up delay-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Товары по категориям</h6>
+                </div>
+                <div class="card-body">
+                    {% if category_stats %}
+                    <div class="chart-pie pt-4 pb-2">
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-center small">
+                        {% for stat in category_stats %}
+                        <span class="mr-2">
+                            <i class="bi bi-circle-fill text-{{ stat.color }}"></i> {{ stat.name }}
+                        </span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="text-center py-4">
+                        <i class="bi bi-pie-chart display-4 text-muted"></i>
+                        <p class="mt-3 text-muted">Нет данных для отображения</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<style>
+    .timeline {
+        position: relative;
+        padding-left: 3rem;
+    }
+
+    .timeline-item {
+        position: relative;
+        margin-bottom: 1.5rem;
+    }
+
+    .timeline-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -2rem;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background-color: #e3e6f0;
+    }
+
+    .timeline-item:last-child::before {
+        height: 1.5rem;
+    }
+
+    .timeline-content {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .timeline-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        flex-shrink: 0;
+        background-color: #f8f9fc;
+    }
+
+    .timeline-details {
+        flex-grow: 1;
+    }
+
+    .chart-pie, .chart-bar {
+        position: relative;
+        height: 250px;
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // График по категориям
+        {% if category_stats %}
+        var ctx = document.getElementById("categoryChart").getContext('2d');
+        var categoryChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: [{% for stat in category_stats %}'{{ stat.name }}',{% endfor %}],
+                datasets: [{
+                    data: [{% for stat in category_stats %}{{ stat.count }},{% endfor %}],
+                    backgroundColor: [{% for stat in category_stats %}'{{ stat.color_code }}',{% endfor %}],
+                    hoverBackgroundColor: [{% for stat in category_stats %}'{{ stat.hover_color }}',{% endfor %}],
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+        {% endif %}
+
+        // График продаж
+        {% if sales_stats %}
+        var ctx2 = document.getElementById("salesChart").getContext('2d');
+        var salesChart = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: [{% for stat in sales_stats %}'{{ stat.date }}',{% endfor %}],
+                datasets: [{
+                    label: "Продажи",
+                    backgroundColor: "#4e73df",
+                    hoverBackgroundColor: "#2e59d9",
+                    borderColor: "#4e73df",
+                    data: [{% for stat in sales_stats %}{{ stat.amount }},{% endfor %}],
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value + ' руб.';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        {% endif %}
+
+        // Анимация элементов при загрузке
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        timelineItems.forEach((item, index) => {
+            item.style.opacity = 0;
+            item.style.transform = 'translateX(-20px)';
+            item.style.animation = `slideInLeft 0.5s ease forwards ${index * 0.1 + 0.5}s`;
+        });
+    });
+</script>
+{% endblock %}

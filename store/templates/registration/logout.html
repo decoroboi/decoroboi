@@ -1,0 +1,30 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Выход{% endblock %}
+
+{% block content %}
+<div class="auth-container" style="min-height: calc(100vh - 200px);">
+    <div class="row justify-content-center w-100">
+        <div class="col-md-6 col-lg-5">
+            <div class="card auth-card">
+                <div class="card-body p-5 text-center">
+                    <div class="mb-4">
+                        <i class="bi bi-box-arrow-right display-1 text-primary"></i>
+                    </div>
+                    
+                    <h2 class="fw-bold mb-3">Вы вышли из системы</h2>
+                    
+                    <p class="text-muted mb-4">
+                        Спасибо, что посетили наш сайт. Надеемся увидеть вас снова!
+                    </p>
+                    
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'login' %}" class="btn btn-primary btn-lg">Войти снова</a>
+                        <a href="{% url 'index' %}" class="btn btn-outline-secondary">На главную</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

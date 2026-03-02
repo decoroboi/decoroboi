@@ -1,0 +1,113 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Заказ #{{ order.id }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <div class="card mb-4">
+            <div class="card-header bg-light">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">Заказ #{{ order.id }}</h4>
+                    <span class="badge 
+                        {% if order.status == 'completed' %}bg-success
+                        {% elif order.status == 'cancelled' %}bg-danger
+                        {% elif order.status == 'processing' %}bg-warning
+                        {% else %}bg-info{% endif %}">
+                        {{ order.get_status_display }}
+                    </span>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h5>Информация о заказе</h5>
+                        <div class="mb-2">
+                            <strong>Дата заказа:</strong> {{ order.created_at|date:"d.m.Y H:i" }}
+                        </div>
+                        <div class="mb-2">
+                            <strong>Статус:</strong> {{ order.get_status_display }}
+                        </div>
+                        <div class="mb-2">
+                            <strong>Способ доставки:</strong> {{ order.get_delivery_method_display }}
+                        </div>
+                        <div class="mb-2">
+                            <strong>Способ оплаты:</strong> {{ order.get_payment_method_display }}
+                        </div>
+                        <div>
+                            <strong>Общая сумма:</strong> {{ order.total_price }} руб.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Информация о покупателе</h5>
+                        <div class="mb-2">
+                            <strong>Имя:</strong> {{ order.user.get_full_name|default:order.user.username }}
+                        </div>
+                        <div class="mb-2">
+                            <strong>Email:</strong> {{ order.user.email }}
+                        </div>
+                        {% if order.user.phone %}
+                        <div class="mb-2">
+                            <strong>Телефон:</strong> {{ order.user.phone }}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <h5 class="mb-3">Состав заказа</h5>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Товар</th>
+                                <th>Цена</th>
+                                <th>Количество</th>
+                                <th>Итого</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in order.items.all %}
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" 
+                                             class="img-thumbnail me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                                        <div>
+                                            <h6 class="mb-0">{{ item.product.name }}</h6>
+                                            <small class="text-muted">{{ item.product.category.name }}</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{ item.price }} руб.</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>{{ item.total_price }} руб.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3" class="text-end"><strong>Общая сумма:</strong></td>
+                                <td><strong>{{ order.total_price }} руб.</strong></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer bg-light">
+                <a href="{% url 'profile' %}" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i> Вернуться к заказам
+                </a>
+                
+                {% if order.status == 'new' %}
+                <form method="post" action="{% url 'cancel_order' order.id %}" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-x-circle"></i> Отменить заказ
+                    </button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

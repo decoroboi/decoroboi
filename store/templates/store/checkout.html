@@ -1,0 +1,203 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Оформление заказа{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4 class="mb-0">Данные для заказа</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                     <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="id_first_name" class="form-label">Имя *</label>
+                            <input type="text" class="form-control" id="id_first_name" name="first_name" 
+                                value="{{ user.first_name|default:'' }}" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="id_last_name" class="form-label">Фамилия *</label>
+                            <input type="text" class="form-control" id="id_last_name" name="last_name" 
+                                value="{{ user.last_name|default:'' }}" required>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+        <label for="id_email" class="form-label">Email *</label>
+        <input type="email" class="form-control" id="id_email" name="email" 
+               value="{{ user.email|default:'' }}" required>
+    </div>
+    
+    <div class="mb-3">
+        <label for="id_phone" class="form-label">Телефон *</label>
+        <input type="tel" class="form-control" id="id_phone" name="phone" 
+               value="{{ user.phone|default:'' }}" required>
+    </div>
+                    
+                    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label for="id_country" class="form-label">Страна *</label>
+            <input type="text" class="form-control" id="id_country" name="country" 
+                   value="{{ user.country|default:'Россия' }}" required>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="id_city" class="form-label">Город *</label>
+            <input type="text" class="form-control" id="id_city" name="city" 
+                   value="{{ user.city|default:'' }}" required>
+        </div>
+    </div>
+
+ <div class="row">
+        <div class="col-md-4 mb-3">
+            <label for="id_postal_code" class="form-label">Почтовый индекс *</label>
+            <input type="text" class="form-control" id="id_postal_code" name="postal_code" 
+                   value="{{ user.postal_code|default:'' }}" required>
+        </div>
+        <div class="col-md-8 mb-4">
+            <label for="id_address" class="form-label">Адрес *</label>
+            <input type="text" class="form-control" id="id_address" name="address" 
+                   value="{{ user.address|default:'' }}" required>
+        </div>
+    </div>
+    <div class="mb-4">
+        <label for="id_customer_notes" class="form-label">Примечания к заказу</label>
+        <textarea class="form-control" id="id_customer_notes" name="customer_notes" rows="3"></textarea>
+    </div>
+                    
+                    <h5 class="mb-3">Способ доставки</h5>
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="delivery_method" 
+                                   id="delivery_pickup" value="pickup" checked>
+                            <label class="form-check-label" for="delivery_pickup">
+                                Самовывоз (бесплатно)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="delivery_method" 
+                                   id="delivery_delivery" value="delivery">
+                            <label class="form-check-label" for="delivery_delivery">
+                                Курьерская доставка (<span class="delivery-price-text">500 руб.</span>)
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <h5 class="mb-3">Способ оплаты</h5>
+                    <div class="mb-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment_method" 
+                                   id="payment_cod" value="cod" checked>
+                            <label class="form-check-label" for="payment_cod">
+                                Оплата при получении
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" id="agree_terms" required>
+                        <label class="form-check-label" for="agree_terms">
+                            Я согласен с условиями обработки персональных данных и возврата
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-lg w-100">Оформить заказ</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">Ваш заказ</h4>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Товары ({{ cart.total_items }})</span>
+                    <span>{{ cart.total_price }} руб.</span>
+                </div>
+                
+                <div class=" justify-content-between mb-2 delivery-cost" style="display:none;">
+                    <span>Доставка</span>
+                    <span class="delivery-price">500 руб.</span>
+                </div>
+                
+                <hr>
+                
+                <div class="d-flex justify-content-between mb-3">
+                    <strong>Итого</strong>
+                    <strong class="total-price">{{ cart.total_price }} руб.</strong>
+                </div>
+                
+                <div class="border-top pt-3">
+                    <h6 class="mb-2">Товары в заказе:</h6>
+                    {% for item in cart.items.all %}
+                    <div class="d-flex align-items-center mb-2">
+                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" 
+                             class="img-thumbnail me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                        <div class="flex-grow-1">
+                            <div class="fw-semibold">{{ item.product.name }}</div>
+                            <div class="small text-muted">{{ item.quantity }} × {{ item.product.price }} руб.</div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const deliveryMethods = document.querySelectorAll('input[name="delivery_method"]');
+    const deliveryCostRow = document.querySelector('.delivery-cost');
+    const deliveryPriceElement = document.querySelector('.delivery-price');
+    const deliveryPriceText = document.querySelector('.delivery-price-text');
+    const totalPriceElement = document.querySelector('.total-price');
+    const basePrice = {{ cart.total_price }};
+    
+    // Проверяем, действует ли бесплатная доставка
+    const freeDeliveryThreshold = 5000;
+    const hasFreeDelivery = basePrice >= freeDeliveryThreshold;
+    
+    // Обновляем текст о стоимости доставки, если действует бесплатная доставка
+    if (hasFreeDelivery) {
+        deliveryPriceText.textContent = 'бесплатно';
+    }
+
+    function updateDeliveryCost() {
+        const selectedMethod = document.querySelector('input[name="delivery_method"]:checked');
+        
+        if (selectedMethod && selectedMethod.value === 'delivery') {
+            if (hasFreeDelivery) {
+                // Бесплатная доставка
+                deliveryCostRow.style.display = 'flex';
+                deliveryPriceElement.textContent = 'Бесплатно';
+                totalPriceElement.textContent = basePrice + ' руб.';
+            } else {
+                // Платная доставка
+                deliveryCostRow.style.display = 'flex';
+                deliveryPriceElement.textContent = '500 руб.';
+                totalPriceElement.textContent = (basePrice + 500) + ' руб.';
+            }
+        } else {
+            // Самовывоз
+            deliveryCostRow.style.display = 'none';
+            totalPriceElement.textContent = basePrice + ' руб.';
+        }
+    }
+
+    // Инициализация при загрузке
+    setTimeout(updateDeliveryCost, 50);
+
+    // Обработка изменений способа доставки
+    deliveryMethods.forEach(method => {
+        method.addEventListener('change', updateDeliveryCost);
+    });
+});
+</script>
+{% endblock %}

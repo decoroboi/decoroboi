@@ -1,0 +1,1206 @@
+
+[
+  {
+    "model": "store.User",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$hIPQo63CM9PsKHZgmXIQFN$niUvnFlEuGSNI/M2thcrxOKHXT63HyWGzFF0D/NdJFg=",
+      "last_login": "2023-10-01T10:00:00Z",
+      "is_superuser": false,
+      "username": "user1",
+      "first_name": "Иван",
+      "last_name": "Петров",
+      "email": "user1@mail.ru",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2023-01-01T10:00:00Z",
+      "role": "user",
+      "phone": "+79161234567",
+      "address": "ул. Ленина, д. 10, кв. 5",
+      "city": "Москва",
+      "postal_code": "101000",
+      "country": "Россия"
+    }
+  },
+  {
+    "model": "store.User",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$hIPQo63CM9PsKHZgmXIQFN$niUvnFlEuGSNI/M2thcrxOKHXT63HyWGzFF0D/NdJFg=",
+      "last_login": "2023-10-02T11:00:00Z",
+      "is_superuser": false,
+      "username": "user2",
+      "first_name": "Мария",
+      "last_name": "Сидорова",
+      "email": "user2@mail.ru",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2023-01-02T10:00:00Z",
+      "role": "user",
+      "phone": "+79161234568",
+      "address": "ул. Пушкина, д. 15, кв. 12",
+      "city": "Санкт-Петербург",
+      "postal_code": "190000",
+      "country": "Россия"
+    }
+  },
+  {
+    "model": "store.User",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$hIPQo63CM9PsKHZgmXIQFN$niUvnFlEuGSNI/M2thcrxOKHXT63HyWGzFF0D/NdJFg=",
+      "last_login": "2023-10-03T12:00:00Z",
+      "is_superuser": false,
+      "username": "admin1",
+      "first_name": "Алексей",
+      "last_name": "Иванов",
+      "email": "admin1@mail.ru",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2023-01-03T10:00:00Z",
+      "role": "admin",
+      "phone": "+79161234569",
+      "address": "пр. Мира, д. 20, кв. 7",
+      "city": "Новосибирск",
+      "postal_code": "630000",
+      "country": "Россия"
+    }
+  },
+  {
+    "model": "store.User",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$hIPQo63CM9PsKHZgmXIQFN$niUvnFlEuGSNI/M2thcrxOKHXT63HyWGzFF0D/NdJFg=",
+      "last_login": "2023-10-04T13:00:00Z",
+      "is_superuser": false,
+      "username": "user3",
+      "first_name": "Ольга",
+      "last_name": "Кузнецова",
+      "email": "user3@mail.ru",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2023-01-04T10:00:00Z",
+      "role": "user",
+      "phone": "+79161234570",
+      "address": "ул. Гагарина, д. 5, кв. 3",
+      "city": "Екатеринбург",
+      "postal_code": "620000",
+      "country": "Россия"
+    }
+  },
+  {
+    "model": "store.User",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$hIPQo63CM9PsKHZgmXIQFN$niUvnFlEuGSNI/M2thcrxOKHXT63HyWGzFF0D/NdJFg=",
+      "last_login": "2023-10-05T14:00:00Z",
+      "is_superuser": false,
+      "username": "user4",
+      "first_name": "Дмитрий",
+      "last_name": "Смирнов",
+      "email": "user4@mail.ru",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2023-01-05T10:00:00Z",
+      "role": "user",
+      "phone": "+79161234571",
+      "address": "ул. Садовая, д. 25, кв. 10",
+      "city": "Казань",
+      "postal_code": "420000",
+      "country": "Россия"
+    }
+  },
+  {
+    "model": "store.User",
+    "pk": 6,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$hIPQo63CM9PsKHZgmXIQFN$niUvnFlEuGSNI/M2thcrxOKHXT63HyWGzFF0D/NdJFg=",
+      "last_login": "2023-10-06T15:00:00Z",
+      "is_superuser": false,
+      "username": "admin2",
+      "first_name": "Елена",
+      "last_name": "Васильева",
+      "email": "admin2@mail.ru",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2023-01-06T10:00:00Z",
+      "role": "admin",
+      "phone": "+79161234572",
+      "address": "пр. Ленина, д. 30, кв. 15",
+      "city": "Нижний Новгород",
+      "postal_code": "603000",
+      "country": "Россия"
+    }
+  },
+  {
+    "model": "store.User",
+    "pk": 7,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$hIPQo63CM9PsKHZgmXIQFN$niUvnFlEuGSNI/M2thcrxOKHXT63HyWGzFF0D/NdJFg=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "anna_k",
+      "first_name": "Анна",
+      "last_name": "Козлова",
+      "email": "anna.k@mail.ru",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2023-10-07T09:00:00Z",
+      "role": "user",
+      "phone": "+79161234573",
+      "address": "ул. Цветочная, д. 8, кв. 45",
+      "city": "Краснодар",
+      "postal_code": "350000",
+      "country": "Россия"
+    }
+  },
+  {
+    "model": "store.User",
+    "pk": 8,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$hIPQo63CM9PsKHZgmXIQFN$niUvnFlEuGSNI/M2thcrxOKHXT63HyWGzFF0D/NdJFg=",
+      "last_login": "2023-10-08T10:30:00Z",
+      "is_superuser": false,
+      "username": "sergey_m",
+      "first_name": "Сергей",
+      "last_name": "Морозов",
+      "email": "sergey.m@mail.ru",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2023-10-07T11:00:00Z",
+      "role": "user",
+      "phone": "+79161234574",
+      "address": "ул. Северная, д. 12, кв. 1",
+      "city": "Омск",
+      "postal_code": "644000",
+      "country": "Россия"
+    }
+  },
+  {
+    "model": "store.User",
+    "pk": 9,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$hIPQo63CM9PsKHZgmXIQFN$niUvnFlEuGSNI/M2thcrxOKHXT63HyWGzFF0D/NdJFg=",
+      "last_login": "2023-10-09T14:15:00Z",
+      "is_superuser": false,
+      "username": "marina_v",
+      "first_name": "Марина",
+      "last_name": "Волкова",
+      "email": "marina.v@mail.ru",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2023-10-08T10:00:00Z",
+      "role": "user",
+      "phone": "+79161234575",
+      "address": "пр. Победы, д. 55, кв. 101",
+      "city": "Челябинск",
+      "postal_code": "454000",
+      "country": "Россия"
+    }
+  },
+  {
+    "model": "store.User",
+    "pk": 10,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$hIPQo63CM9PsKHZgmXIQFN$niUvnFlEuGSNI/M2thcrxOKHXT63HyWGzFF0D/NdJFg=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "pavel_s",
+      "first_name": "Павел",
+      "last_name": "Соколов",
+      "email": "pavel.s@mail.ru",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2023-10-09T09:30:00Z",
+      "role": "user",
+      "phone": "+79161234576",
+      "address": "ул. Кирова, д. 3, кв. 20",
+      "city": "Уфа",
+      "postal_code": "450000",
+      "country": "Россия"
+    }
+  },
+  {
+    "model": "store.Category",
+    "pk": 1,
+    "fields": {
+      "name": "Виниловые обои",
+      "slug": "vinyl-wallpapers",
+      "description": "Влагостойкие и прочные виниловые обои для кухни и прихожей"
+    }
+  },
+  {
+    "model": "store.Category",
+    "pk": 2,
+    "fields": {
+      "name": "Флизелиновые обои",
+      "slug": "non-woven-wallpapers",
+      "description": "Дышащие и экологичные флизелиновые обои под покраску"
+    }
+  },
+  {
+    "model": "store.Category",
+    "pk": 3,
+    "fields": {
+      "name": "Бумажные обои",
+      "slug": "paper-wallpapers",
+      "description": "Классические бумажные обои для детских и спален"
+    }
+  },
+  {
+    "model": "store.Category",
+    "pk": 4,
+    "fields": {
+      "name": "Фотообои",
+      "slug": "photo-wallpapers",
+      "description": "Современные фотообои с любыми изображениями"
+    }
+  },
+  {
+    "model": "store.Category",
+    "pk": 5,
+    "fields": {
+      "name": "Текстильные обои",
+      "slug": "textile-wallpapers",
+      "description": "Элитные текстильные обои с натуральными волокнами"
+    }
+  },
+  {
+    "model": "store.Category",
+    "pk": 6,
+    "fields": {
+      "name": "Стеклообои",
+      "slug": "glass-wallpapers",
+      "description": "Прочные и пожаробезопасные стеклообои под покраску"
+    }
+  },
+  {
+    "model": "store.Category",
+    "pk": 7,
+    "fields": {
+      "name": "Жидкие обои",
+      "slug": "liquid-wallpapers",
+      "description": "Экологичное покрытие без швов с эффектом шелка"
+    }
+  },
+  {
+    "model": "store.Category",
+    "pk": 8,
+    "fields": {
+      "name": "3D обои",
+      "slug": "3d-wallpapers",
+      "description": "Обои с эффектом объема и глубины пространства"
+    }
+  },
+  {
+    "model": "store.Category",
+    "pk": 9,
+    "fields": {
+      "name": "Самоклеящаяся пленка",
+      "slug": "self-adhesive-film",
+      "description": "Пленка для декора мебели и стен, моющаяся"
+    }
+  },
+  {
+    "model": "store.Category",
+    "pk": 10,
+    "fields": {
+      "name": "Клей для обоев",
+      "slug": "wallpaper-glue",
+      "description": "Специализированный клей для всех типов покрытий"
+    }
+  },
+  {
+    "model": "store.Category",
+    "pk": 11,
+    "fields": {
+      "name": "Инструменты",
+      "slug": "tools",
+      "description": "Валики, шпатели и ножи для поклейки обоев"
+    }
+  },
+  {
+    "model": "store.Product",
+    "pk": 1,
+    "fields": {
+      "name": "Виниловые обои «Саванна»",
+      "description": "Влагостойкие обои с текстурой под натуральные материалы",
+      "price": "1899.99",
+      "image": "products/savanna.jpg",
+      "stock": 25,
+      "created_at": "2023-09-01T10:00:00Z",
+      "updated_at": "2023-09-01T10:00:00Z",
+      "category": 1,
+      "is_featured": true
+    }
+  },
+  {
+    "model": "store.Product",
+    "pk": 2,
+    "fields": {
+      "name": "Флизелиновые обои «Элеганс»",
+      "description": "Качественные обои под покраску с рельефным узором",
+      "price": "2199.99",
+      "image": "products/elegance.jpg",
+      "stock": 18,
+      "created_at": "2023-09-02T10:00:00Z",
+      "updated_at": "2023-09-02T10:00:00Z",
+      "category": 2,
+      "is_featured": true
+    }
+  },
+  {
+    "model": "store.Product",
+    "pk": 3,
+    "fields": {
+      "name": "Бумажные обои «Детский мир»",
+      "description": "Яркие обои с мультяшными персонажами для детской комнаты",
+      "price": "899.99",
+      "image": "products/kids_world.jpg",
+      "stock": 35,
+      "created_at": "2023-09-03T10:00:00Z",
+      "updated_at": "2023-09-03T10:00:00Z",
+      "category": 3,
+      "is_featured": false
+    }
+  },
+  {
+    "model": "store.Product",
+    "pk": 4,
+    "fields": {
+      "name": "Фотообои «Городской пейзаж»",
+      "description": "Панорамные фотообои с видом на современный мегаполис",
+      "price": "4599.99",
+      "image": "products/cityscape.jpg",
+      "stock": 8,
+      "created_at": "2023-09-04T10:00:00Z",
+      "updated_at": "2023-09-04T10:00:00Z",
+      "category": 4,
+      "is_featured": true
+    }
+  },
+  {
+    "model": "store.Product",
+    "pk": 5,
+    "fields": {
+      "name": "Текстильные обои «Лен»",
+      "description": "Элитные обои с натуральными льняными волокнами",
+      "price": "3899.99",
+      "image": "products/linen.jpg",
+      "stock": 12,
+      "created_at": "2023-09-05T10:00:00Z",
+      "updated_at": "2023-09-05T10:00:00Z",
+      "category": 5,
+      "is_featured": false
+    }
+  },
+  {
+    "model": "store.Product",
+    "pk": 6,
+    "fields": {
+      "name": "Стеклообои «Рогожка»",
+      "description": "Прочные стеклообои с классическим узором «рогожка»",
+      "price": "2799.99",
+      "image": "products/basketweave.jpg",
+      "stock": 20,
+      "created_at": "2023-09-06T10:00:00Z",
+      "updated_at": "2023-09-06T10:00:00Z",
+      "category": 6,
+      "is_featured": true
+    }
+  },
+  {
+    "model": "store.Product",
+    "pk": 7,
+    "fields": {
+      "name": "Жидкие обои «Шелковый путь»",
+      "description": "Бежевые жидкие обои с золотистыми нитями",
+      "price": "1250.00",
+      "image": "products/liquid_silk.jpg",
+      "stock": 50,
+      "created_at": "2023-10-01T10:00:00Z",
+      "updated_at": "2023-10-01T10:00:00Z",
+      "category": 7,
+      "is_featured": true
+    }
+  },
+  {
+    "model": "store.Product",
+    "pk": 8,
+    "fields": {
+      "name": "Жидкие обои «Снежная королева»",
+      "description": "Белоснежное покрытие с легким блеском",
+      "price": "1100.00",
+      "image": "products/liquid_snow.jpg",
+      "stock": 40,
+      "created_at": "2023-10-01T11:00:00Z",
+      "updated_at": "2023-10-01T11:00:00Z",
+      "category": 7,
+      "is_featured": false
+    }
+  },
+  {
+    "model": "store.Product",
+    "pk": 9,
+    "fields": {
+      "name": "3D обои «Геометрический тоннель»",
+      "description": "Визуально расширяют пространство, черно-белый стиль",
+      "price": "3500.00",
+      "image": "products/3d_tunnel.jpg",
+      "stock": 15,
+      "created_at": "2023-10-02T10:00:00Z",
+      "updated_at": "2023-10-02T10:00:00Z",
+      "category": 8,
+      "is_featured": true
+    }
+  },
+  {
+    "model": "store.Product",
+    "pk": 10,
+    "fields": {
+      "name": "3D обои «Орхидеи»",
+      "description": "Крупные цветы с эффектом объема для спальни",
+      "price": "3200.00",
+      "image": "products/3d_orchids.jpg",
+      "stock": 10,
+      "created_at": "2023-10-02T11:00:00Z",
+      "updated_at": "2023-10-02T11:00:00Z",
+      "category": 8,
+      "is_featured": false
+    }
+  },
+  {
+    "model": "store.Product",
+    "pk": 11,
+    "fields": {
+      "name": "3D обои «Кирпичная стена»",
+      "description": "Реалистичная имитация старого кирпича",
+      "price": "2900.00",
+      "image": "products/3d_brick.jpg",
+      "stock": 25,
+      "created_at": "2023-10-02T12:00:00Z",
+      "updated_at": "2023-10-02T12:00:00Z",
+      "category": 8,
+      "is_featured": false
+    }
+  },
+  {
+    "model": "store.Product",
+    "pk": 12,
+    "fields": {
+      "name": "Пленка «Белый мрамор»",
+      "description": "Ширина 45см, длина 8м, для столешниц и подоконников",
+      "price": "450.00",
+      "image": "products/film_marble.jpg",
+      "stock": 100,
+      "created_at": "2023-10-03T10:00:00Z",
+      "updated_at": "2023-10-03T10:00:00Z",
+      "category": 9,
+      "is_featured": false
+    }
+  },
+  {
+    "model": "store.Product",
+    "pk": 13,
+    "fields": {
+      "name": "Пленка «Темный дуб»",
+      "description": "Текстурированная пленка под дерево",
+      "price": "420.00",
+      "image": "products/film_oak.jpg",
+      "stock": 80,
+      "created_at": "2023-10-03T11:00:00Z",
+      "updated_at": "2023-10-03T11:00:00Z",
+      "category": 9,
+      "is_featured": false
+    }
+  },
+  {
+    "model": "store.Product",
+    "pk": 14,
+    "fields": {
+      "name": "Пленка «Красный глянец»",
+      "description": "Яркая глянцевая пленка для обновления кухни",
+      "price": "390.00",
+      "image": "products/film_red.jpg",
+      "stock": 60,
+      "created_at": "2023-10-03T12:00:00Z",
+      "updated_at": "2023-10-03T12:00:00Z",
+      "category": 9,
+      "is_featured": false
+    }
+  },
+  {
+    "model": "store.Product",
+    "pk": 15,
+    "fields": {
+      "name": "Клей универсальный «Мастер»",
+      "description": "Подходит для всех типов бумажных и виниловых обоев, 200г",
+      "price": "250.00",
+      "image": "products/glue_master.jpg",
+      "stock": 200,
+      "created_at": "2023-10-04T10:00:00Z",
+      "updated_at": "2023-10-04T10:00:00Z",
+      "category": 10,
+      "is_featured": true
+    }
+  },
+  {
+    "model": "store.Product",
+    "pk": 16,
+    "fields": {
+      "name": "Клей для флизелина «Профи»",
+      "description": "Усиленная формула, наносится прямо на стену, 300г",
+      "price": "380.00",
+      "image": "products/glue_profi.jpg",
+      "stock": 150,
+      "created_at": "2023-10-04T11:00:00Z",
+      "updated_at": "2023-10-04T11:00:00Z",
+      "category": 10,
+      "is_featured": false
+    }
+  },
+  {
+    "model": "store.Product",
+    "pk": 17,
+    "fields": {
+      "name": "Клей для стыков",
+      "description": "Тюбик 60г для подклейки стыков и уголков",
+      "price": "150.00",
+      "image": "products/glue_joints.jpg",
+      "stock": 300,
+      "created_at": "2023-10-04T12:00:00Z",
+      "updated_at": "2023-10-04T12:00:00Z",
+      "category": 10,
+      "is_featured": false
+    }
+  },
+  {
+    "model": "store.Product",
+    "pk": 18,
+    "fields": {
+      "name": "Валик прижимной резиновый",
+      "description": "Для разглаживания обоев и удаления пузырьков воздуха",
+      "price": "280.00",
+      "image": "products/roller_rubber.jpg",
+      "stock": 50,
+      "created_at": "2023-10-05T10:00:00Z",
+      "updated_at": "2023-10-05T10:00:00Z",
+      "category": 11,
+      "is_featured": false
+    }
+  },
+  {
+    "model": "store.Product",
+    "pk": 19,
+    "fields": {
+      "name": "Шпатель обойный «Крыло»",
+      "description": "Пластиковый шпатель для углов и прижимания",
+      "price": "120.00",
+      "image": "products/spatula.jpg",
+      "stock": 100,
+      "created_at": "2023-10-05T11:00:00Z",
+      "updated_at": "2023-10-05T11:00:00Z",
+      "category": 11,
+      "is_featured": false
+    }
+  },
+  {
+    "model": "store.Product",
+    "pk": 20,
+    "fields": {
+      "name": "Нож малярный со сменными лезвиями",
+      "description": "18мм, усиленный корпус",
+      "price": "190.00",
+      "image": "products/cutter.jpg",
+      "stock": 80,
+      "created_at": "2023-10-05T12:00:00Z",
+      "updated_at": "2023-10-05T12:00:00Z",
+      "category": 11,
+      "is_featured": false
+    }
+  },
+  {
+    "model": "store.Product",
+    "pk": 21,
+    "fields": {
+      "name": "Виниловые обои «Лофт»",
+      "description": "Серый бетон, горячее тиснение",
+      "price": "1999.00",
+      "image": "products/vinyl_loft.jpg",
+      "stock": 30,
+      "created_at": "2023-10-06T10:00:00Z",
+      "updated_at": "2023-10-06T10:00:00Z",
+      "category": 1,
+      "is_featured": true
+    }
+  },
+  {
+    "model": "store.Product",
+    "pk": 22,
+    "fields": {
+      "name": "Флизелиновые обои «Дамаск»",
+      "description": "Классический узор, светло-бежевые",
+      "price": "2300.00",
+      "image": "products/nonwoven_damask.jpg",
+      "stock": 20,
+      "created_at": "2023-10-06T11:00:00Z",
+      "updated_at": "2023-10-06T11:00:00Z",
+      "category": 2,
+      "is_featured": false
+    }
+  },
+  {
+    "model": "store.Product",
+    "pk": 23,
+    "fields": {
+      "name": "Бумажные обои «Звездочки»",
+      "description": "Эко-обои для детской, светящиеся в темноте",
+      "price": "750.00",
+      "image": "products/paper_stars.jpg",
+      "stock": 45,
+      "created_at": "2023-10-06T12:00:00Z",
+      "updated_at": "2023-10-06T12:00:00Z",
+      "category": 3,
+      "is_featured": true
+    }
+  },
+  {
+    "model": "store.Product",
+    "pk": 24,
+    "fields": {
+      "name": "Фотообои «Тропический лес»",
+      "description": "Сочная зелень, монстера и папоротник",
+      "price": "4200.00",
+      "image": "products/photo_tropic.jpg",
+      "stock": 12,
+      "created_at": "2023-10-07T10:00:00Z",
+      "updated_at": "2023-10-07T10:00:00Z",
+      "category": 4,
+      "is_featured": true
+    }
+  },
+  {
+    "model": "store.Product",
+    "pk": 25,
+    "fields": {
+      "name": "Текстильные обои «Велюр»",
+      "description": "Мягкие на ощупь, бордовый цвет, премиум класс",
+      "price": "5500.00",
+      "image": "products/textile_velour.jpg",
+      "stock": 8,
+      "created_at": "2023-10-07T11:00:00Z",
+      "updated_at": "2023-10-07T11:00:00Z",
+      "category": 5,
+      "is_featured": false
+    }
+  },
+  {
+    "model": "store.Product",
+    "pk": 26,
+    "fields": {
+      "name": "Стеклообои «Паутинка»",
+      "description": "Армирующие, под покраску, плотность 40г/м2",
+      "price": "1500.00",
+      "image": "products/glass_spiderweb.jpg",
+      "stock": 60,
+      "created_at": "2023-10-07T12:00:00Z",
+      "updated_at": "2023-10-07T12:00:00Z",
+      "category": 6,
+      "is_featured": false
+    }
+  },
+  {
+    "model": "store.Cart",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "created_at": "2023-10-01T11:00:00Z"
+    }
+  },
+  {
+    "model": "store.Cart",
+    "pk": 2,
+    "fields": {
+      "user": 2,
+      "created_at": "2023-10-02T12:00:00Z"
+    }
+  },
+  {
+    "model": "store.Cart",
+    "pk": 3,
+    "fields": {
+      "user": 3,
+      "created_at": "2023-10-03T13:00:00Z"
+    }
+  },
+  {
+    "model": "store.Cart",
+    "pk": 4,
+    "fields": {
+      "user": 4,
+      "created_at": "2023-10-04T14:00:00Z"
+    }
+  },
+  {
+    "model": "store.Cart",
+    "pk": 5,
+    "fields": {
+      "user": 5,
+      "created_at": "2023-10-05T15:00:00Z"
+    }
+  },
+  {
+    "model": "store.Cart",
+    "pk": 6,
+    "fields": {
+      "user": 6,
+      "created_at": "2023-10-06T16:00:00Z"
+    }
+  },
+  {
+    "model": "store.Cart",
+    "pk": 7,
+    "fields": {
+      "user": 7,
+      "created_at": "2023-10-07T09:05:00Z"
+    }
+  },
+  {
+    "model": "store.Cart",
+    "pk": 8,
+    "fields": {
+      "user": 8,
+      "created_at": "2023-10-08T10:35:00Z"
+    }
+  },
+  {
+    "model": "store.Cart",
+    "pk": 9,
+    "fields": {
+      "user": 9,
+      "created_at": "2023-10-09T14:20:00Z"
+    }
+  },
+  {
+    "model": "store.Cart",
+    "pk": 10,
+    "fields": {
+      "user": 10,
+      "created_at": "2023-10-09T09:35:00Z"
+    }
+  },
+  {
+    "model": "store.CartItem",
+    "pk": 1,
+    "fields": {
+      "cart": 1,
+      "product": 1,
+      "quantity": 3
+    }
+  },
+  {
+    "model": "store.CartItem",
+    "pk": 2,
+    "fields": {
+      "cart": 1,
+      "product": 2,
+      "quantity": 2
+    }
+  },
+  {
+    "model": "store.CartItem",
+    "pk": 3,
+    "fields": {
+      "cart": 2,
+      "product": 3,
+      "quantity": 4
+    }
+  },
+  {
+    "model": "store.CartItem",
+    "pk": 4,
+    "fields": {
+      "cart": 3,
+      "product": 4,
+      "quantity": 1
+    }
+  },
+  {
+    "model": "store.CartItem",
+    "pk": 5,
+    "fields": {
+      "cart": 4,
+      "product": 5,
+      "quantity": 2
+    }
+  },
+  {
+    "model": "store.CartItem",
+    "pk": 6,
+    "fields": {
+      "cart": 5,
+      "product": 6,
+      "quantity": 3
+    }
+  },
+  {
+    "model": "store.Order",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "created_at": "2023-10-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z",
+      "status": "new",
+      "delivery_method": "delivery",
+      "payment_method": "cod",
+      "total_price": "9499.95",
+      "shipping_address": "ул. Ленина, д. 10, кв. 5",
+      "shipping_city": "Москва",
+      "shipping_zip_code": "101000",
+      "customer_notes": "Позвонить за час до доставки",
+      "admin_notes": "",
+      "assigned_to": 3,
+      "priority": "medium"
+    }
+  },
+  {
+    "model": "store.Order",
+    "pk": 2,
+    "fields": {
+      "user": 2,
+      "created_at": "2023-10-02T13:00:00Z",
+      "updated_at": "2023-10-02T13:00:00Z",
+      "status": "processing",
+      "delivery_method": "pickup",
+      "payment_method": "online",
+      "total_price": "3599.96",
+      "shipping_address": "ул. Пушкина, д. 15, кв. 12",
+      "shipping_city": "Санкт-Петербург",
+      "shipping_zip_code": "190000",
+      "customer_notes": "Заберу после 18:00",
+      "admin_notes": "Оплата подтверждена",
+      "assigned_to": 3,
+      "priority": "low"
+    }
+  },
+  {
+    "model": "store.Order",
+    "pk": 3,
+    "fields": {
+      "user": 3,
+      "created_at": "2023-10-03T14:00:00Z",
+      "updated_at": "2023-10-03T14:00:00Z",
+      "status": "paid",
+      "delivery_method": "delivery",
+      "payment_method": "online",
+      "total_price": "4599.99",
+      "shipping_address": "пр. Мира, д. 20, кв. 7",
+      "shipping_city": "Новосибирск",
+      "shipping_zip_code": "630000",
+      "customer_notes": "",
+      "admin_notes": "Требуется аккуратная доставка",
+      "assigned_to": 6,
+      "priority": "medium"
+    }
+  },
+  {
+    "model": "store.Order",
+    "pk": 4,
+    "fields": {
+      "user": 4,
+      "created_at": "2023-10-04T15:00:00Z",
+      "updated_at": "2023-10-04T15:00:00Z",
+      "status": "shipped",
+      "delivery_method": "delivery",
+      "payment_method": "cod",
+      "total_price": "7799.98",
+      "shipping_address": "ул. Гагарина, д. 5, кв. 3",
+      "shipping_city": "Екатеринбург",
+      "shipping_zip_code": "620000",
+      "customer_notes": "Осторожно, хрупкий материал",
+      "admin_notes": "Отправлено курьерской службой",
+      "assigned_to": 6,
+      "priority": "medium"
+    }
+  },
+  {
+    "model": "store.Order",
+    "pk": 5,
+    "fields": {
+      "user": 5,
+      "created_at": "2023-10-05T16:00:00Z",
+      "updated_at": "2023-10-05T16:00:00Z",
+      "status": "completed",
+      "delivery_method": "pickup",
+      "payment_method": "cod",
+      "total_price": "8399.97",
+      "shipping_address": "ул. Садовая, д. 25, кв. 10",
+      "shipping_city": "Казань",
+      "shipping_zip_code": "420000",
+      "customer_notes": "",
+      "admin_notes": "Заказ завершен успешно",
+      "assigned_to": 3,
+      "priority": "low"
+    }
+  },
+  {
+    "model": "store.Order",
+    "pk": 6,
+    "fields": {
+      "user": 6,
+      "created_at": "2023-10-06T17:00:00Z",
+      "updated_at": "2023-10-06T17:00:00Z",
+      "status": "cancelled",
+      "delivery_method": "delivery",
+      "payment_method": "online",
+      "total_price": "2799.99",
+      "shipping_address": "пр. Ленина, д. 30, кв. 15",
+      "shipping_city": "Нижний Новгород",
+      "shipping_zip_code": "603000",
+      "customer_notes": "Передумал с цветом",
+      "admin_notes": "Клиент отменил заказ",
+      "assigned_to": 6,
+      "priority": "low"
+    }
+  },
+  {
+    "model": "store.Order",
+    "pk": 7,
+    "fields": {
+      "user": 7,
+      "created_at": "2023-10-07T14:00:00Z",
+      "updated_at": "2023-10-07T14:00:00Z",
+      "status": "new",
+      "delivery_method": "delivery",
+      "payment_method": "online",
+      "total_price": "2780.00",
+      "shipping_address": "ул. Цветочная, д. 8, кв. 45",
+      "shipping_city": "Краснодар",
+      "shipping_zip_code": "350000",
+      "customer_notes": "Код домофона 45",
+      "admin_notes": "",
+      "assigned_to": null,
+      "priority": "medium"
+    }
+  },
+  {
+    "model": "store.Order",
+    "pk": 8,
+    "fields": {
+      "user": 8,
+      "created_at": "2023-10-08T15:30:00Z",
+      "updated_at": "2023-10-09T09:00:00Z",
+      "status": "processing",
+      "delivery_method": "pickup",
+      "payment_method": "cod",
+      "total_price": "1470.00",
+      "shipping_address": "ул. Северная, д. 12, кв. 1",
+      "shipping_city": "Омск",
+      "shipping_zip_code": "644000",
+      "customer_notes": "",
+      "admin_notes": "Заказ собран, ждет выдачи",
+      "assigned_to": 3,
+      "priority": "low"
+    }
+  },
+  {
+    "model": "store.Order",
+    "pk": 9,
+    "fields": {
+      "user": 9,
+      "created_at": "2023-10-09T16:00:00Z",
+      "updated_at": "2023-10-09T16:05:00Z",
+      "status": "paid",
+      "delivery_method": "delivery",
+      "payment_method": "online",
+      "total_price": "5500.00",
+      "shipping_address": "пр. Победы, д. 55, кв. 101",
+      "shipping_city": "Челябинск",
+      "shipping_zip_code": "454000",
+      "customer_notes": "Нужна сдача с 5000, если оплата курьеру (но оплачено онлайн)",
+      "admin_notes": "Срочная доставка",
+      "assigned_to": 6,
+      "priority": "high"
+    }
+  },
+  {
+    "model": "store.Order",
+    "pk": 10,
+    "fields": {
+      "user": 10,
+      "created_at": "2023-10-09T10:00:00Z",
+      "updated_at": "2023-10-09T18:00:00Z",
+      "status": "completed",
+      "delivery_method": "pickup",
+      "payment_method": "cod",
+      "total_price": "1000.00",
+      "shipping_address": "ул. Кирова, д. 3, кв. 20",
+      "shipping_city": "Уфа",
+      "shipping_zip_code": "450000",
+      "customer_notes": "",
+      "admin_notes": "Клиент доволен",
+      "assigned_to": 3,
+      "priority": "low"
+    }
+  },
+  {
+    "model": "store.Order",
+    "pk": 11,
+    "fields": {
+      "user": 2,
+      "created_at": "2023-10-10T09:00:00Z",
+      "updated_at": "2023-10-10T09:00:00Z",
+      "status": "new",
+      "delivery_method": "delivery",
+      "payment_method": "online",
+      "total_price": "3880.00",
+      "shipping_address": "ул. Пушкина, д. 15, кв. 12",
+      "shipping_city": "Санкт-Петербург",
+      "shipping_zip_code": "190000",
+      "customer_notes": "Повторный заказ, скидка постоянного клиента?",
+      "admin_notes": "",
+      "assigned_to": null,
+      "priority": "medium"
+    }
+  },
+  {
+    "model": "store.OrderItem",
+    "pk": 1,
+    "fields": {
+      "order": 1,
+      "product": 1,
+      "quantity": 3,
+      "price": "1899.99"
+    }
+  },
+  {
+    "model": "store.OrderItem",
+    "pk": 2,
+    "fields": {
+      "order": 1,
+      "product": 2,
+      "quantity": 2,
+      "price": "2199.99"
+    }
+  },
+  {
+    "model": "store.OrderItem",
+    "pk": 3,
+    "fields": {
+      "order": 2,
+      "product": 3,
+      "quantity": 4,
+      "price": "899.99"
+    }
+  },
+  {
+    "model": "store.OrderItem",
+    "pk": 4,
+    "fields": {
+      "order": 3,
+      "product": 4,
+      "quantity": 1,
+      "price": "4599.99"
+    }
+  },
+  {
+    "model": "store.OrderItem",
+    "pk": 5,
+    "fields": {
+      "order": 4,
+      "product": 5,
+      "quantity": 2,
+      "price": "3899.99"
+    }
+  },
+  {
+    "model": "store.OrderItem",
+    "pk": 6,
+    "fields": {
+      "order": 6,
+      "product": 6,
+      "quantity": 1,
+      "price": "2799.99"
+    }
+  },
+  {
+    "model": "store.OrderItem",
+    "pk": 7,
+    "fields": {
+      "order": 7,
+      "product": 7,
+      "quantity": 2,
+      "price": "1250.00"
+    }
+  },
+  {
+    "model": "store.OrderItem",
+    "pk": 8,
+    "fields": {
+      "order": 7,
+      "product": 18,
+      "quantity": 1,
+      "price": "280.00"
+    }
+  },
+  {
+    "model": "store.OrderItem",
+    "pk": 9,
+    "fields": {
+      "order": 8,
+      "product": 12,
+      "quantity": 3,
+      "price": "450.00"
+    }
+  },
+  {
+    "model": "store.OrderItem",
+    "pk": 10,
+    "fields": {
+      "order": 8,
+      "product": 19,
+      "quantity": 1,
+      "price": "120.00"
+    }
+  },
+  {
+    "model": "store.OrderItem",
+    "pk": 11,
+    "fields": {
+      "order": 9,
+      "product": 25,
+      "quantity": 1,
+      "price": "5500.00"
+    }
+  },
+  {
+    "model": "store.OrderItem",
+    "pk": 12,
+    "fields": {
+      "order": 10,
+      "product": 15,
+      "quantity": 4,
+      "price": "250.00"
+    }
+  },
+  {
+    "model": "store.OrderItem",
+    "pk": 13,
+    "fields": {
+      "order": 11,
+      "product": 9,
+      "quantity": 1,
+      "price": "3500.00"
+    }
+  },
+  {
+    "model": "store.OrderItem",
+    "pk": 14,
+    "fields": {
+      "order": 11,
+      "product": 16,
+      "quantity": 1,
+      "price": "380.00"
+    }
+  }
+]

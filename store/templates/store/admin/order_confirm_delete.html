@@ -1,0 +1,44 @@
+{% extends 'store/admin/base.html' %}
+
+{% block title %}Удаление заказа #{{ order.id }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-danger">Подтверждение удаления</h6>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <i class="bi bi-exclamation-triangle display-1 text-danger"></i>
+                        <h4 class="mt-3">Вы уверены, что хотите удалить заказ?</h4>
+                        <p class="mb-0">Заказ: <strong>#{{ order.id }}</strong></p>
+                        <p class="mb-0">Клиент: <strong>{{ order.user.username }}</strong></p>
+                        <p class="mb-0">Сумма: <strong>{{ order.total_price }} руб.</strong></p>
+                        <p class="mb-0">Статус: <span class="badge bg-{% if order.status == 'new' %}primary{% elif order.status == 'completed' %}success{% elif order.status == 'cancelled' %}danger{% else %}warning{% endif %}">{{ order.get_status_display }}</span></p>
+                    </div>
+                    
+                    <div class="alert alert-warning">
+                        <i class="bi bi-warning"></i>
+                        <strong>Внимание!</strong> Это действие невозможно отменить. Все данные заказа будут безвозвратно удалены.
+                    </div>
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'admin_order_list' %}" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left"></i> Отмена
+                            </a>
+                            <button type="submit" class="btn btn-danger">
+                                <i class="bi bi-trash"></i> Удалить заказ
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,219 @@
+{% extends 'store/admin/base.html' %}
+
+{% block title %}Пользователь: {{ user.username }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Заголовок страницы -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Пользователь: {{ user.username }}</h1>
+        <a href="{% url 'admin_user_list' %}" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Назад к списку
+        </a>
+    </div>
+
+    <div class="row">
+        <!-- Информация о пользователе -->
+        <div class="col-lg-4 mb-4">
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Основная информация</h6>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <div class="bg-primary bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center" 
+                             style="width: 100px; height: 100px;">
+                            <i class="bi bi-person-fill text-white fs-1"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Имя пользователя:</label>
+                        <p class="form-control-static">{{ user.username }}</p>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Email:</label>
+                        <p class="form-control-static">{{ user.email }}</p>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Имя и фамилия:</label>
+                        <p class="form-control-static">
+                            {% if user.first_name or user.last_name %}
+                                {{ user.first_name }} {{ user.last_name }}
+                            {% else %}
+                                Не указано
+                            {% endif %}
+                        </p>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Дата регистрации:</label>
+                        <p class="form-control-static">{{ user.date_joined|date:"d.m.Y H:i" }}</p>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Последний вход:</label>
+                        <p class="form-control-static">{{ user.last_login|date:"d.m.Y H:i" }}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Статус пользователя -->
+            <div class="card shadow mt-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Статус и роль</h6>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="id_role" class="form-label fw-bold">Роль:</label>
+                            <select name="role" id="id_role" class="form-select">
+                                {% for value, label in role_choices %}
+                                <option value="{{ value }}" {% if user.role == value %}selected{% endif %}>{{ label }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="id_is_active" name="is_active" 
+                                       {% if user.is_active %}checked{% endif %}>
+                                <label class="form-check-label" for="id_is_active">Активный аккаунт</label>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary w-100">Сохранить изменения</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Контактная информация и заказы -->
+        <div class="col-lg-8 mb-4">
+            <!-- Контактная информация -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Контактная информация</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Телефон:</label>
+                            <p class="form-control-static">{{ user.phone|default:"Не указан" }}</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Страна:</label>
+                            <p class="form-control-static">{{ user.country|default:"Не указана" }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Город:</label>
+                            <p class="form-control-static">{{ user.city|default:"Не указан" }}</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Почтовый индекс:</label>
+                            <p class="form-control-static">{{ user.postal_code|default:"Не указан" }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Адрес:</label>
+                        <p class="form-control-static">{{ user.address|default:"Не указан" }}</p>
+                    </div>
+                    
+                    {% if user.get_full_address %}
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Полный адрес:</label>
+                        <p class="form-control-static">{{ user.get_full_address }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Заказы пользователя -->
+            <div class="card shadow">
+                <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="m-0 font-weight-bold text-primary">Заказы пользователя</h6>
+                    <span class="badge bg-primary">{{ user_orders.count }} заказов</span>
+                </div>
+                <div class="card-body">
+                    {% if user_orders %}
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover" width="100%" cellspacing="0">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>ID заказа</th>
+                                    <th>Дата</th>
+                                    <th>Статус</th>
+                                    <th>Сумма</th>
+                                    <th>Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for order in user_orders %}
+                                <tr>
+                                    <td>#{{ order.id }}</td>
+                                    <td>{{ order.created_at|date:"d.m.Y H:i" }}</td>
+                                    <td>
+                                        <span class="badge bg-{% if order.status == 'new' %}primary{% elif order.status == 'completed' %}success{% elif order.status == 'cancelled' %}danger{% else %}warning{% endif %}">
+                                            {{ order.get_status_display }}
+                                        </span>
+                                    </td>
+                                    <td>{{ order.total_price }} руб.</td>
+                                    <td>
+                                        <a href="{% url 'admin_order_detail' order.id %}" class="btn btn-sm btn-primary">
+                                            <i class="bi bi-eye"></i> Просмотр
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Пагинация для заказов -->
+                    {% if user_orders.has_other_pages %}
+                    <nav aria-label="Page navigation" class="mt-4">
+                        <ul class="pagination justify-content-center">
+                            {% if user_orders.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ user_orders.previous_page_number }}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            
+                            {% for num in user_orders.paginator.page_range %}
+                            <li class="page-item {% if user_orders.number == num %}active{% endif %}">
+                                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                            </li>
+                            {% endfor %}
+                            
+                            {% if user_orders.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ user_orders.next_page_number }}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                    {% endif %}
+                    
+                    {% else %}
+                    <div class="text-center py-4">
+                        <i class="bi bi-cart-x display-4 text-muted"></i>
+                        <p class="mt-3 text-muted">У пользователя нет заказов</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

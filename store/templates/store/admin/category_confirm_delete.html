@@ -1,0 +1,42 @@
+{% extends 'store/admin/base.html' %}
+
+{% block title %}Удаление категории{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-danger">Подтверждение удаления</h6>
+            </div>
+            <div class="card-body">
+                <div class="text-center mb-4">
+                    <i class="bi bi-exclamation-triangle display-1 text-danger"></i>
+                    <h4 class="mt-3">Вы уверены, что хотите удалить категорию?</h4>
+                    <p class="mb-0">Категория: <strong>{{ category.name }}</strong></p>
+                    {% if category.products.exists %}
+                    <div class="alert alert-warning mt-3">
+                        <i class="bi bi-warning"></i> Внимание! В этой категории есть товары. 
+                        Сначала переместите или удалите их.
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'admin_category_list' %}" class="btn btn-secondary">Отмена</a>
+                        
+                        {% if not category.products.exists %}
+                        <button type="submit" class="btn btn-danger">
+                            <i class="bi bi-trash"></i> Удалить категорию
+                        </button>
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

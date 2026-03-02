@@ -1,0 +1,44 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <img src="{{ product.image.url }}" class="card-img-top product-image" alt="{{ product.name }}">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="h3">{{ product.name }}</h1>
+                <div>
+                <span class="lead text-primary fw-bold">{{ product.price }} руб.</span>
+                <small class="text-muted">за рулон</small>
+                <div>
+                <p class="mb-3">{{ product.description }}</p>
+                
+                <div class="d-flex align-items-center mb-3">
+                    <span class="badge bg-success me-2">В наличии: {{ product.stock }} шт.</span>
+                    <span class="badge bg-secondary">{{ product.category.name }}</span>
+                </div>
+                
+                {% if user.is_authenticated %}
+                <form method="post" action="{% url 'add_to_cart' product.id %}">
+                    {% csrf_token %}
+                    <div class="row g-3 align-items-center mb-4">
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary btn-lg">Добавить в корзину</button>
+                        </div>
+                    </div>
+                </form>
+                {% else %}
+                <div class="alert alert-info">
+                    <a href="{% url 'login' %}" class="alert-link">Войдите</a> или 
+                    <a href="{% url 'register' %}" class="alert-link">зарегистрируйтесь</a>, чтобы добавить товар в корзину.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
