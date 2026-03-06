@@ -42,7 +42,7 @@ def _build_local_design_hint(user_prompt):
 
 
 def _get_hf_design_hint(user_prompt):
-    hf_api_token = os.getenv('HF_API_TOKEN', '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').strip()
+    hf_api_token = os.getenv('HF_API_TOKEN', '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').strip()
     
     # Меняем модель по умолчанию на Qwen 2.5 (открытая, бесплатная, отлично пишет на русском)
     hf_model_id = os.getenv('HF_MODEL_ID', 'Qwen/Qwen2.5-72B-Instruct')
