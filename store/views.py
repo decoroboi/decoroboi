@@ -9,6 +9,11 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.core.paginator import Paginator
 from django.utils import timezone
 from datetime import timedelta
+import os
+
+# Импортируем InferenceClient из huggingface_hub
+from huggingface_hub import InferenceClient
+from huggingface_hub.errors import HfHubHTTPError
 
 
 class CustomLoginView(LoginView):
@@ -26,16 +31,61 @@ class CustomLogoutView(LogoutView):
 def is_admin(user):
     return user.is_authenticated and (user.role == 'admin' or user.is_superuser)
 
+
+def _build_local_design_hint(user_prompt):
+    return (
+        f'Рекомендация для "{user_prompt}": используйте светлую основу, '
+        'одну акцентную стену и текстурные обои для глубины. '
+        'Для компактных комнат выбирайте вертикальные узоры и '
+        'избегайте тёмных палитр на всех стенах.'
+    )
+
+
+def _get_hf_design_hint(user_prompt):
+    hf_api_token = os.getenv('HF_API_TOKEN', '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').strip()
+    
+    # Меняем модель по умолчанию на Qwen 2.5 (открытая, бесплатная, отлично пишет на русском)
+    hf_model_id = os.getenv('HF_MODEL_ID', 'Qwen/Qwen2.5-72B-Instruct')
+
+    if not hf_api_token:
+        return None, 'HF_API_TOKEN is missing'
+
+    instruction = (
+        'Ты — дизайнер интерьеров. Отвечай на русском языке кратко (3-4 предложения). '
+        'Дай практическую рекомендацию по обоям: стиль, палитру, текстуру '
+        'и одну частую ошибку, которую стоит избежать. '
+        f'Запрос клиента: {user_prompt}'
+    )
+
+    # Инициализируем клиент
+    client = InferenceClient(token=hf_api_token)
+
+    try:
+        response = client.chat_completion(
+            model=hf_model_id,
+            messages=[{'role': 'user', 'content': instruction}],
+            max_tokens=300,
+            temperature=0.7,
+            stream=False,
+        )
+        
+        text = response.choices[0].message.content.strip()
+        if text:
+            return text, None
+        return None, 'Empty response'
+
+    except Exception as exc:
+        return None, f'HF Error: {str(exc)}'
+
 def index(request):
     products = Product.objects.all()
     categories = Category.objects.all()
     featured_products = Product.objects.filter(is_featured=True)
-    # Фильтрация по категории
+    
     category_id = request.GET.get('category')
     if category_id:
         products = products.filter(category_id=category_id)
     
-    # Поиск по названию и описанию
     query = request.GET.get('q')
     if query:
         products = products.filter(
@@ -43,7 +93,6 @@ def index(request):
             Q(description__icontains=query)
         )
     
-    # Фильтрация по цене
     min_price = request.GET.get('min_price')
     max_price = request.GET.get('max_price')
     
@@ -59,10 +108,28 @@ def index(request):
         except ValueError:
             pass
     
+    ai_prompt = request.GET.get('ai_prompt', '').strip()
+    ai_suggestion = None
+    ai_suggestion_source = None
+    ai_error = None
+
+    if ai_prompt:
+        ai_suggestion, ai_error = _get_hf_design_hint(ai_prompt)
+        if ai_suggestion:
+            # Обновляем название модели здесь, чтобы оно совпадало
+            ai_suggestion_source = os.getenv('HF_MODEL_ID', 'Qwen/Qwen2.5-72B-Instruct')
+        else:
+            ai_suggestion = _build_local_design_hint(ai_prompt)
+            ai_suggestion_source = 'local-fallback'
+
     context = {
         'products': products,
         'featured_products': featured_products,
         'categories': categories,
+        'ai_prompt': ai_prompt,
+        'ai_suggestion': ai_suggestion,
+        'ai_suggestion_source': ai_suggestion_source,
+        'ai_error': ai_error,
     }
     return render(request, 'store/index.html', context)
 
@@ -650,39 +717,6 @@ def admin_category_delete(request, category_id):
     }
     return render(request, 'store/admin/category_confirm_delete.html', context)
 
-@user_passes_test(is_admin)
-def admin_user_detail(request, user_id):
-    """Детальная страница пользователя для администрирования"""
-    user_obj = get_object_or_404(User, id=user_id)
-    
-    if request.method == 'POST':
-        # Обновление роли пользователя
-        new_role = request.POST.get('role')
-        if new_role:
-            user_obj.role = new_role
-        
-        # Блокировка/разблокировка пользователя
-        is_active = request.POST.get('is_active')
-        user_obj.is_active = (is_active == 'on')
-        
-        try:
-            user_obj.save()
-            messages.success(request, f'Данные пользователя {user_obj.username} успешно обновлены')
-        except Exception as e:
-            messages.error(request, f'Ошибка при обновлении данных: {str(e)}')
-    
-    # Получаем заказы пользователя с пагинацией
-    user_orders = Order.objects.filter(user=user_obj).order_by('-created_at')
-    paginator = Paginator(user_orders, 10)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    
-    context = {
-        'user': user_obj,
-        'user_orders': page_obj,
-        'role_choices': User.ROLE_CHOICES,
-    }
-    return render(request, 'store/admin/user_detail.html', context)
 
 @user_passes_test(is_admin)
 def admin_order_delete(request, order_id):

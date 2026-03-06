@@ -18,6 +18,34 @@
     </div>
 </div>
 
+<div class="card border-0 shadow-sm mb-5">
+    <div class="card-body p-4">
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+            <h2 class="h4 mb-0">AI-подбор стиля обоев</h2>
+            <span class="badge bg-info text-dark">Hugging Face (free model)</span>
+        </div>
+        <p class="text-muted mb-3">Опишите комнату, стиль или задачу, и получите короткую идею оформления.</p>
+
+        <form method="get" class="row g-2">
+            <div class="col-lg-9">
+                <input type="text" name="ai_prompt" class="form-control" value="{{ ai_prompt }}" placeholder="Например: светлая кухня в сканди стиле" required>
+            </div>
+            <div class="col-lg-3 d-grid">
+                <button type="submit" class="btn btn-primary">Сгенерировать идею</button>
+            </div>
+        </form>
+
+        {% if ai_suggestion %}
+        <div class="alert alert-light border mt-3 mb-0">
+            <div class="small text-muted mb-1">Источник: {{ ai_suggestion_source }}</div>
+            <div>{{ ai_suggestion }}</div>
+            {% if ai_error %}
+            <div class="small text-warning mt-2">Hugging Face недоступен: {{ ai_error }}. Показан fallback-совет.</div>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</div>
 {% if featured_products %}
 <div class="mb-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
