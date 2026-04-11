@@ -1,0 +1,33 @@
+{% extends 'store/admin/base.html' %}
+
+{% block title %}Удаление товара{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-danger">Подтверждение удаления</h6>
+            </div>
+            <div class="card-body">
+                <div class="text-center mb-4">
+                    <i class="bi bi-exclamation-triangle display-1 text-danger"></i>
+                    <h4 class="mt-3">Вы уверены, что хотите удалить товар?</h4>
+                    <p class="mb-0">Товар: <strong>{{ product.name }}</strong></p>
+                </div>
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'admin_product_list' %}" class="btn btn-secondary">Отмена</a>
+                        <button type="submit" class="btn btn-danger">
+                            <i class="bi bi-trash"></i> Удалить товар
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
