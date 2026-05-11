@@ -235,21 +235,22 @@
 
         /* Контактная информация в хедере */
         .header-contacts {
-            display: flex;
-            gap: 1.5rem;
-            font-size: 0.85rem;
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
-
-        .header-contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #555;
-            white-space: nowrap;
-        }
+        display: flex;
+        gap: 0.8rem;          /* было 1.5rem */
+        font-size: 0.8rem;    /* добавлено уменьшение шрифта */
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    
+    .header-contact-item {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;          /* было 0.5rem */
+        color: #555;
+        white-space: nowrap;
+        font-size: 0.8rem;    /* добавлено для надёжности */
+    }
 
         @media (max-width: 768px) {
             .header-contacts {
