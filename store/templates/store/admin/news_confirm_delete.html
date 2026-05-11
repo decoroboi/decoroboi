@@ -1,0 +1,27 @@
+{% extends 'store/admin/base.html' %}
+
+{% block title %}Удаление новости - Админ-панель{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Удаление новости</h2>
+    <a href="{% url 'admin_news_list' %}" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left"></i> К списку
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <p>Вы уверены, что хотите удалить новость <strong>"{{ news.title }}"</strong>?</p>
+        <p class="text-muted">Это действие нельзя отменить.</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">
+                <i class="bi bi-trash"></i> Удалить
+            </button>
+            <a href="{% url 'admin_news_list' %}" class="btn btn-outline-secondary">Отмена</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

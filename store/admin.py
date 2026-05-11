@@ -16,6 +16,12 @@ class CustomUserAdmin(UserAdmin):
         }),
     )
 
+class NewsAdmin(admin.ModelAdmin):
+    list_display = ('title', 'is_published', 'created_at')
+    list_filter = ('is_published', 'created_at')
+    search_fields = ('title', 'content')
+    list_editable = ('is_published',)
+
 admin.site.register(User, CustomUserAdmin)
 admin.site.register(Category)
 admin.site.register(Product)
@@ -23,3 +29,4 @@ admin.site.register(Cart)
 admin.site.register(CartItem)
 admin.site.register(Order)
 admin.site.register(OrderItem)
+admin.site.register(News, NewsAdmin)

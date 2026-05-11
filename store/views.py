@@ -3,8 +3,8 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.db.models import Q, Count, Sum
-from .models import Product, Category, Cart, CartItem, Order, OrderItem, User
-from .forms import UserRegisterForm, ProductForm, CategoryForm, CheckoutForm
+from .models import Product, Category, Cart, CartItem, Order, OrderItem, User, News
+from .forms import UserRegisterForm, ProductForm, CategoryForm, CheckoutForm, NewsForm
 from django.contrib.auth.views import LoginView, LogoutView
 from django.core.paginator import Paginator
 from django.utils import timezone
@@ -723,7 +723,7 @@ def admin_order_delete(request, order_id):
     """Удаление заказа"""
     try:
         order = get_object_or_404(Order, id=order_id)
-        
+
         if request.method == 'POST':
             # Возвращаем товары на склад при удалении заказа
             if order.status != 'cancelled':
@@ -731,17 +731,91 @@ def admin_order_delete(request, order_id):
                     product = item.product
                     product.stock += item.quantity
                     product.save()
-            
+
             order_id = order.id
             order.delete()
             messages.success(request, f'Заказ #{order_id} успешно удален')
             return redirect('admin_order_list')
-        
+
         context = {
             'order': order,
         }
         return render(request, 'store/admin/order_confirm_delete.html', context)
-    
+
     except Exception as e:
         messages.error(request, f'Ошибка при удалении заказа: {str(e)}')
         return redirect('admin_order_list')
+
+
+def contacts(request):
+    """Страница контактов с картой Курска"""
+    context = {
+        'phone': '+7 (951) 231-94-85',
+        'email': 'decoroboi@mail.ru',
+        'address': 'г. Курск, ул. Литовская, 12а',
+        'coordinates': '51.7288,36.1930',
+    }
+    return render(request, 'store/contacts.html', context)
+
+
+def news_list(request):
+    """Список новостей"""
+    news_items = News.objects.filter(is_published=True).order_by('-created_at')
+    paginator = Paginator(news_items, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        'page_obj': page_obj,
+        'news_items': page_obj.object_list,
+    }
+    return render(request, 'store/news_list.html', context)
+
+
+@user_passes_test(is_admin)
+def admin_news_list(request):
+    """Список новостей для администрирования"""
+    news_items = News.objects.all().order_by('-created_at')
+    context = {
+        'news_items': news_items,
+    }
+    return render(request, 'store/admin/news_list.html', context)
+
+
+@user_passes_test(is_admin)
+def admin_news_create(request):
+    """Создание новости"""
+    if request.method == 'POST':
+        form = NewsForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Новость успешно создана')
+            return redirect('admin_news_list')
+    else:
+        form = NewsForm()
+    return render(request, 'store/admin/news_form.html', {'form': form})
+
+
+@user_passes_test(is_admin)
+def admin_news_edit(request, news_id):
+    """Редактирование новости"""
+    news = get_object_or_404(News, id=news_id)
+    if request.method == 'POST':
+        form = NewsForm(request.POST, request.FILES, instance=news)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Новость успешно обновлена')
+            return redirect('admin_news_list')
+    else:
+        form = NewsForm(instance=news)
+    return render(request, 'store/admin/news_form.html', {'form': form, 'news': news})
+
+
+@user_passes_test(is_admin)
+def admin_news_delete(request, news_id):
+    """Удаление новости"""
+    news = get_object_or_404(News, id=news_id)
+    if request.method == 'POST':
+        news.delete()
+        messages.success(request, 'Новость успешно удалена')
+        return redirect('admin_news_list')
+    return render(request, 'store/admin/news_confirm_delete.html', {'news': news})

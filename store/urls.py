@@ -16,7 +16,11 @@ urlpatterns = [
     path('profile/update/', views.update_profile, name='update_profile'),
     path('order/<int:order_id>/cancel/', views.cancel_order, name='cancel_order'),
     path('order/<int:order_id>/', views.order_detail, name='order_detail'),
-    
+
+    # Контакты и новости
+    path('contacts/', views.contacts, name='contacts'),
+    path('news/', views.news_list, name='news_list'),
+
     # Админские маршруты
     path('admin/dashboard/', views.admin_dashboard, name='admin_dashboard'),
     path('admin/orders/', views.admin_order_list, name='admin_order_list'),
@@ -32,4 +36,8 @@ urlpatterns = [
     path('admin/categories/create/', views.admin_category_create, name='admin_category_create'),
     path('admin/categories/edit/<int:category_id>/', views.admin_category_edit, name='admin_category_edit'),
     path('admin/categories/delete/<int:category_id>/', views.admin_category_delete, name='admin_category_delete'),
+    path('admin/news/', views.admin_news_list, name='admin_news_list'),
+    path('admin/news/create/', views.admin_news_create, name='admin_news_create'),
+    path('admin/news/edit/<int:news_id>/', views.admin_news_edit, name='admin_news_edit'),
+    path('admin/news/delete/<int:news_id>/', views.admin_news_delete, name='admin_news_delete'),
 ]

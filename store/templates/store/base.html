@@ -284,6 +284,16 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contacts' %}">
+                            <i class="bi bi-geo-alt"></i> Контакты
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'news_list' %}">
+                            <i class="bi bi-newspaper"></i> Новости
+                        </a>
+                    </li>
                     {% if user.is_authenticated %}
                         {% if user.is_admin %}
                         <li class="nav-item">

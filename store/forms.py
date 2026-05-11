@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import User, Product, Category, Order
+from .models import User, Product, Category, Order, News
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField(
@@ -10,7 +10,7 @@ class UserRegisterForm(UserCreationForm):
             'placeholder': 'Email'
         })
     )
-    
+
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
@@ -20,7 +20,7 @@ class UserRegisterForm(UserCreationForm):
                 'placeholder': 'Имя пользователя'
             }),
         }
-    
+
     def __init__(self, *args, **kwargs):
         super(UserRegisterForm, self).__init__(*args, **kwargs)
         self.fields['password1'].widget = forms.PasswordInput(attrs={
@@ -49,13 +49,23 @@ class CategoryForm(forms.ModelForm):
             'slug': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),
         }
-    
+
     def __init__(self, *args, **kwargs):
         super(CategoryForm, self).__init__(*args, **kwargs)
-        # Делаем поле slug необязательным
         self.fields['slug'].required = False
 
 class CheckoutForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ['delivery_method', 'payment_method']
+
+class NewsForm(forms.ModelForm):
+    class Meta:
+        model = News
+        fields = ['title', 'content', 'image', 'is_published']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 6}),
+            'image': forms.FileInput(attrs={'class': 'form-control'}),
+            'is_published': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        }
