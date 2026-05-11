@@ -15,6 +15,7 @@
         <table class="table table-hover">
             <thead>
                 <tr>
+                    <th style="width: 80px;">Фото</th>
                     <th>Заголовок</th>
                     <th>Статус</th>
                     <th>Дата создания</th>
@@ -24,6 +25,15 @@
             <tbody>
                 {% for news in news_items %}
                 <tr>
+                    <td>
+                        {% if news.image %}
+                        <img src="{{ news.image.url }}" alt="{{ news.title }}" style="width: 60px; height: 40px; object-fit: cover; border-radius: 4px;">
+                        {% else %}
+                        <div style="width: 60px; height: 40px; background: #f0f0f0; border-radius: 4px; display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-image text-muted"></i>
+                        </div>
+                        {% endif %}
+                    </td>
                     <td>{{ news.title }}</td>
                     <td>
                         {% if news.is_published %}
@@ -44,7 +54,7 @@
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="4" class="text-center text-muted">Новостей пока нет</td>
+                    <td colspan="5" class="text-center text-muted">Новостей пока нет</td>
                 </tr>
                 {% endfor %}
             </tbody>
